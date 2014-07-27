@@ -1,37 +1,49 @@
 
 $(document).ready(function(){
 
-	var humanInput = $("#userGuess").val();
 
-	var counter = 0;
+	/*--- Generate Computer Number ---*/
 
 	var answerNumber = function() {
-		computerNumber = Math.floor(Math.random() * 101);
-			console.log(computerNumber);
-	}
+			computerNumber = Math.floor(Math.random() * 101);
+				console.log(computerNumber);
+	};
 
 	answerNumber();
 
-	/*--- Start New Game ---*/
-	$(".new").click(function() {
-		$("ul").empty();
-		var counter = 0;
-		answerNumber();
-	})
-
-	/*--- During a Game ---*/
+	var guessCounter = function(){
+		countNumber = $("#count").val();
+		guessCount = +countNumber;
+		};
 
 
-
-	$("#count").replaceWith(counter++);
+	guessCounter();
 	
+	/*--- Manage User Input ---*/
+
+		$("#guessButton").on("click", function(){
+			var humanInput = $("#userGuess").val();
+			$("#guessList").append("<li>" + humanInput + "</li>");
+			$("#userGuess").val(" ");
+		});
+	
+  	/*--- Start New Game ---*/
+	
+	$(".new").click(function() {
+		$("#guessList").empty();
+		answerNumber();
+		$("#count").val("0");
+	});
+
 	/*--- Display information modal box ---*/
+
   	$(".what").click(function(){
     	$(".overlay").fadeIn(1000);
 
   	});
 
   	/*--- Hide information modal box ---*/
+
   	$("a.close").click(function(){
   		$(".overlay").fadeOut(1000);
   	});
