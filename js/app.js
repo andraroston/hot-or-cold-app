@@ -1,39 +1,65 @@
-
 $(document).ready(function(){
 
-
-	/*--- Generate Computer Number ---*/
+	var guessNumber = $("#userGuess").val();
 
 	var answerNumber = function() {
 			computerNumber = Math.floor(Math.random() * 101);
 				console.log(computerNumber);
+				return computerNumber;
 	};
 
 	answerNumber();
 
-	var guessCounter = function(){
-		countNumber = $("#count").val();
-		guessCount = +countNumber;
-		};
+
+	function gamePlay() { 
+
+	var guessNumber = $("#userGuess").val();
+		console.log(guessNumber);	
+
+	computerNumber;
+
+	var guessChecker = (Math.abs(guessNumber - computerNumber));
+		console.log(guessChecker);
 
 
-	guessCounter();
-	
-	/*--- Manage User Input ---*/
+	if(guessChecker === 0) {
+		$("#feedback").replaceWith("<h2 id='feedback'>" + "You got it right - press the New Game button to start again!" + "</h2>");
+	}
 
-		$("#guessButton").on("click", function(){
-			var humanInput = $("#userGuess").val();
-			$("#guessList").append("<li>" + humanInput + "</li>");
+	else if(guessChecker >= 30 && guessChecker <=49) {
+		$("#feedback").replaceWith("<h2 id=feedback>" + "You're cold!" + "</h2>");
+	}
+
+	else if(guessChecker >= 20 && guessChecker <=29) {
+		$("#feedback").replaceWith("<h2 id='feedback'>" + "You're warm!" + "</h2>");
+	}
+
+	else if(guessChecker >= 10 && guessChecker <=19) {
+		$("#feedback").replaceWith("<h2 id='feedback'>" + "You're hot!" + "</h2>");
+	}
+
+	else if(guessChecker >= 1 && guessChecker <=9) {
+		$("#feedback").replaceWith("<h2 id='feedback'>" + "You're burning up!" + "</h2>");
+	}
+
+	else {
+		$("#feedback").replaceWith("<h2 id='feedback'>" + "You're freezing!" + "</h2>");
+	}
+
+};
+
+	$("#guessButton").on("click", function(){
+		
+		/* add validating of guessNumber */
+
+			var guessNumber = $("#userGuess").val();
+			$("#guessList").append("<li>" + guessNumber + "</li>")
+			gamePlay();
 			$("#userGuess").val(" ");
-		});
-	
-  	/*--- Start New Game ---*/
-	
-	$(".new").click(function() {
-		$("#guessList").empty();
-		answerNumber();
-		$("#count").val("0");
-	});
+		
+		
+	}); 
+
 
 	/*--- Display information modal box ---*/
 
@@ -49,5 +75,3 @@ $(document).ready(function(){
   	});
 
 });
-
-
