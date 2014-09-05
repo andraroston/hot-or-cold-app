@@ -58,7 +58,7 @@ $(document).ready(function(){
 		event.preventDefault();
 
 		var guessNumber = $("#userGuess").val();
-			if(guessNumber > 1 && guessNumber < 101) {
+			if(guessNumber > 0 && guessNumber < 101) {
 				$("#guessList").append("<li>" + guessNumber + "</li>");
 				gamePlay();
 				counting();
